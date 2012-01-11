@@ -54,9 +54,11 @@
 	
 	" Setting up the directories {
 		set backup 						" backups are nice ...
-		set undofile					" so is persistent undo ...
-		set undolevels=1000 "maximum number of changes that can be undone
-		set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+		if v:version >= 730
+			set undofile					" so is persistent undo ...
+			set undolevels=1000 "maximum number of changes that can be undone
+			set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+		endif
         " Moved to function at bottom of the file
 		"set backupdir=$HOME/.vimbackup//  " but not when they clog .
 		"set directory=$HOME/.vimswap// 	" Same for swap files
