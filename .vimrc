@@ -116,9 +116,8 @@
 	set scrolloff=3 				" minimum lines to keep above and below cursor
 	set foldenable  				" auto fold code
 	set gdefault					" the /g flag on :s substitutions by default
-    set list
+    set list!
     set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
-
 
 " }
 
@@ -478,3 +477,4 @@ endfunction
         source ~/.vimrc.local
     endif
 " }
+set list!
