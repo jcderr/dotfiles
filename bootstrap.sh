@@ -9,7 +9,7 @@ die() {
     exit 1
 }
 
-echo "thanks for installing spf13-vim\n"
+echo "thanks for installing jcderr/devenvironment, based on spf13-vim\n"
 
 # Backup existing .vim stuff
 echo "backing up current vim config\n"
@@ -17,9 +17,9 @@ for i in ~/.vim ~/.vimrc ~/.gvimrc; do [ -e $i ] && mv $i $i.old; done
 
 
 echo "cloning spf13-vim\n"
-git clone --recursive git://github.com/spf13/spf13-vim.git ~/.spf13-vim 
-ln -s ~/.spf13-vim/.vimrc ~/.vimrc
-ln -s ~/.spf13-vim/.vim ~/.vim
+git clone --recursive git@bitbucket.org:jcderr/devenvironment.git ~/.devenv
+ln -s ~/.devenv/.vimrc ~/.vimrc
+ln -s ~/.devenv/.vim ~/.vim
 
 
 # Build command-t for your system
