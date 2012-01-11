@@ -33,3 +33,9 @@ echo "building command-t executable\n"
 echo "command-t depends on ruby and rake to be present\n"
 cd ~/.vim/bundle/command-t
 (rake make) || warn "Ruby compilation failed. Ruby, GCC or rake not installed?"
+
+# Optionally, create a python virtualenv with the first argument
+if [ "$#" -ne 0 ]; then
+    mkdir ~/.pyenv
+    virtualenv ~/.pyenv/$1
+fi
