@@ -23,7 +23,7 @@ for i in ~/.vim ~/.vimrc ~/.gvimrc; do [ -e $i ] && mv $i $i.old; done
 
 
 echo "cloning jcderr-devenvironment\n"
-git clone --recursive https://jcderr@bitbucket.org/jcderr/devenvironment.git ~/.devenv
+git clone --recursive https://bitbucket.org/jcderr/devenvironment.git ~/.devenv
 ln -s ~/.devenv/.vimrc ~/.vimrc
 ln -s ~/.devenv/.vim ~/.vim
 
