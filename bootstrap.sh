@@ -16,7 +16,7 @@ echo "backing up current vim config\n"
 for i in ~/.vim ~/.vimrc ~/.gvimrc; do [ -e $i ] && mv $i $i.old; done
 
 
-echo "cloning spf13-vim\n"
+echo "cloning jcderr-devenvironment\n"
 git clone --recursive git@bitbucket.org:jcderr/devenvironment.git ~/.devenv
 ln -s ~/.devenv/.vimrc ~/.vimrc
 ln -s ~/.devenv/.vim ~/.vim
