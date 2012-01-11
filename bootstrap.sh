@@ -11,9 +11,11 @@ die() {
 
 echo "thanks for installing jcderr/devenvironment, based on spf13-vim\n"
 
-sudo apt-get -qq update
-sudo apt-get install git-core build-essential vim python-setuptools \
-    python-pip python-virtualenv ruby rake rubygems ruby-dev ctags
+if [ -x /usr/bin/apt-get ]; then
+    sudo apt-get -qq update
+    sudo apt-get install -y git-core build-essential vim python-setuptools \
+        python-pip python-virtualenv ruby rake rubygems ruby-dev ctags
+fi
 
 # Backup existing .vim stuff
 echo "backing up current vim config\n"
