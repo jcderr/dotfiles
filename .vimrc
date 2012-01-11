@@ -51,12 +51,11 @@ endif
 	set spell 		 	        	" spell checking on
 	
 	" Setting up the directories {
+	if v:version >= 730
 		set backup 						" backups are nice ...
-		if v:version >= 730
-			set undofile					" so is persistent undo ...
-			set undolevels=1000 "maximum number of changes that can be undone
-			set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-		endif
+		set undofile					" so is persistent undo ...
+		set undolevels=1000 "maximum number of changes that can be undone
+		set undoreload=10000 "maximum number lines to save for undo on a buffer reload
         " Moved to function at bottom of the file
 		"set backupdir=$HOME/.vimbackup//  " but not when they clog .
 		"set directory=$HOME/.vimswap// 	" Same for swap files
@@ -68,6 +67,7 @@ endif
 		"silent execute '!mkdir -p $HOME/.vimviews'
 		au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
 		au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
+	endif
 	" }
 " }
 
@@ -114,7 +114,11 @@ endif
 	set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
 	set scrolljump=5 				" lines to scroll when cursor leaves screen
 	set scrolloff=3 				" minimum lines to keep above and below cursor
-	set foldenable  				" auto fold code
+	if v:version >= 730
+        set foldenable   				" auto fold code
+    else
+        set foldenable!
+    endif
 	set gdefault					" the /g flag on :s substitutions by default
     set list!
     set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
