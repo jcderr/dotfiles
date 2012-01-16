@@ -14,7 +14,8 @@ echo "thanks for installing jcderr/devenvironment, based on spf13-vim\n"
 if [ -x /usr/bin/apt-get ]; then
     sudo apt-get -qq update
     sudo apt-get install -y git-core build-essential vim python-setuptools \
-        python-pip python-virtualenv ruby rake rubygems ruby-dev ctags
+        python-pip python-virtualenv ruby rake rubygems ruby-dev ctags \
+        nano   
 fi
 
 # Backup existing .vim stuff
@@ -33,6 +34,8 @@ echo "building command-t executable\n"
 echo "command-t depends on ruby and rake to be present\n"
 cd ~/.vim/bundle/command-t
 (rake make) || warn "Ruby compilation failed. Ruby, GCC or rake not installed?"
+
+sudo pip install virtualenvwrapper
 
 # Optionally, create a python virtualenv with the first argument
 if [ "$#" -ne 0 ]; then
