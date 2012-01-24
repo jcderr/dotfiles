@@ -261,13 +261,10 @@ endif
 	" }
 
 	" OmniComplete {
-		"if has("autocmd") && exists("+omnifunc")
-			"autocmd Filetype *
-				"\if &omnifunc == "" |
-				"\setlocal omnifunc=syntaxcomplete#Complete |
-				"\endif
-		"endif
-
+		if has("autocmd") && exists("+omnifunc")
+			autocmd Filetype * setlocal omnifunc=syntaxcomplete#Complete
+		endif
+        
 		" Popup menu hightLight Group
 		"highlight Pmenu	ctermbg=13	guibg=DarkBlue
         "highlight PmenuSel	ctermbg=7	guibg=DarkBlue		guifg=LightBlue
