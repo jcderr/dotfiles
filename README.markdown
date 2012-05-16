@@ -9,5 +9,5 @@ More to come
 
 # INSTALLATION
 
-> curl -L http://code.derr.me/devenvironment/raw/master/bootstrap.sh | sh
+> wget -O- http://code.derr.me/devenvironment/raw/master/bootstrap.sh | sh
 
