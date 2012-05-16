@@ -37,5 +37,5 @@ cd ~/.vim/bundle/command-t
 
 sudo pip install virtualenvwrapper
 
-curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+wget -O- https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 
