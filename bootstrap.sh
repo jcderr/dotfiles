@@ -37,8 +37,5 @@ cd ~/.vim/bundle/command-t
 
 sudo pip install virtualenvwrapper
 
-# Optionally, create a python virtualenv with the first argument
-if [ "$#" -ne 0 ]; then
-    mkdir ~/.pyenv
-    virtualenv ~/.pyenv/$1
-fi
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+
