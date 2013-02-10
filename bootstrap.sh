@@ -25,17 +25,6 @@ for i in ~/.vim ~/.vimrc ~/.gvimrc; do [ -e $i ] && mv $i $i.old; done
 
 echo "cloning jcderr-devenvironment\n"
 git clone --recursive https://bitbucket.org/jcderr/devenvironment.git ~/.devenv
-ln -s ~/.devenv/.vimrc ~/.vimrc
-ln -s ~/.devenv/.vim ~/.vim
-
-
-# Build command-t for your system
-echo "building command-t executable\n"
-echo "command-t depends on ruby and rake to be present\n"
-cd ~/.vim/bundle/command-t
-(rake make) || warn "Ruby compilation failed. Ruby, GCC or rake not installed?"
-
-sudo pip install virtualenvwrapper
-
-#wget -O- https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+ln -s ~/.devenv/vimrc ~/.vimrc
+ln -s ~/.devenv/vim ~/.vim
 
