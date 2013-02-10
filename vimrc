@@ -74,7 +74,7 @@ augroup vimrc_autocmds
 augroup END
 
 " automatically change window's cwd to file's dir
-set autochdir
+" set autochdir
 
 if has ('gui_running')
     highlight Pmenu guibg=#cccccc gui=bold
