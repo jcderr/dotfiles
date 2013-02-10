@@ -78,5 +78,5 @@ set autochdir
 
 if has ('gui_running')
     highlight Pmenu guibg=#cccccc gui=bold
-
+endif
 
