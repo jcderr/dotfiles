@@ -15,10 +15,10 @@ Bundle 'gmarik/vundle'
 " The bundles you install will be listed here
 
 filetype plugin indent on
- Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
- Bundle 'tpope/vim-fugitive'
- Bundle 'scrooloose/nerdtree'
- Bundle 'klen/python-mode'
+" Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/nerdtree'
+Bundle 'klen/python-mode'
 
 " The rest of your config follows here
 
@@ -59,8 +59,8 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
 
 " Powerline setup
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-set laststatus=2
+" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+" set laststatus=2
 
 "       Other Stuff
 	

@@ -9,7 +9,14 @@ More to come
 
 # INSTALLATION
 
-> wget -O- http://code.derr.me/devenvironment/raw/master/bootstrap.sh | sh
+    wget -O- http://code.derr.me/devenvironment/raw/master/bootstrap.sh | sh
+    cd ~/.devenv && git checkout -b mac-local
+
+# Commentary
+
+The mac-local branch is the same as linux-local, but with Powerline disabled, as Powerline seems to conflict with
+NerdTree and causes a segfault when VIM is loaded with no buffer (i.e. `vim` with no file specified). I look to
+add this support in the future.
 
 # Python Mode Settings
 
