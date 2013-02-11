@@ -15,10 +15,10 @@ Bundle 'gmarik/vundle'
 " The bundles you install will be listed here
 
 filetype plugin indent on
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
-Bundle 'klen/python-mode'
+ Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+ Bundle 'tpope/vim-fugitive'
+ Bundle 'scrooloose/nerdtree'
+ Bundle 'klen/python-mode'
 
 " The rest of your config follows here
 
