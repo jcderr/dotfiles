@@ -9,8 +9,7 @@ More to come
 
 # INSTALLATION
 
-    wget -O- http://code.derr.me/devenvironment/raw/master/bootstrap.sh | sh
-    cd ~/.devenv && git checkout -b mac-local
+    wget -O- http://code.derr.me/devenvironment/raw/mac-local/bootstrap.sh | sh
 
 # Commentary
 

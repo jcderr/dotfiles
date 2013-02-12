@@ -9,13 +9,14 @@ die() {
     exit 1
 }
 
-echo "thanks for installing jcderr/devenvironment, based on spf13-vim\n"
+echo "thanks for installing jcderr/devenvironment"
+echo "installing mac-local"
 
 if [ -x /usr/bin/apt-get ]; then
     sudo apt-get -qq update
     sudo apt-get install -y git-core build-essential vim python-setuptools \
         python-pip python-virtualenv ruby rake rubygems ruby-dev ctags \
-        nano zsh  
+        nano zsh 
 fi
 
 # Backup existing .vim stuff
@@ -24,8 +25,7 @@ for i in ~/.vim ~/.vimrc ~/.gvimrc; do [ -e $i ] && mv $i $i.old; done
 
 
 echo "cloning jcderr-devenvironment\n"
-git clone --recursive https://bitbucket.org/jcderr/devenvironment.git ~/.devenv
-git checkout linux-local
+git clone -b mac-local --recursive https://bitbucket.org/jcderr/devenvironment.git ~/.devenv
 ln -s ~/.devenv/vimrc ~/.vimrc
 ln -s ~/.devenv/vim ~/.vim
 
