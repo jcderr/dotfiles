@@ -4,11 +4,62 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+syntax on
+set mouse=a
+set history=500
+set spell
+"color solarized
+set tabpagemax=15
+set showmode
+set cursorline
+set nu              " set line numbers on
+set showmatch       " shows matching brackets, etc
+set incsearch
+set hlsearch
+set whichwrap=b,s,h,l,<,>,[,]
+set scrolljump=5
+set scrolloff=3
+set foldenable!
+
+" formatting
+set nowrap
+set autoindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set softtabstop=4
+"set pastetoggle=<F12>   " sane indentation on paste, tends to be insane
+autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+    " remove trailing whitespace & ^M chars
 
-" let Vundle manage Vundle
+" other stuff
+let mapleader = ','
+nnoremap ; :
+    " ; works like : for commands
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+map <C-L> <C-W>l<C-W>_
+map <C-H> <C-W>h<C-W>_
+    " easier window movement
+
+nnoremap j gj
+nnoremap k gk
+    " wrapped lines goes down/up to next row
+
+nmap <silent> <leader>/ :nohlsearch<CR>
+    " clears search highlight
+
+vnoremap < <gv
+vnoremap > >gv
+    " visual shifting
+
+if has('cmdline_info')
+    set ruler
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
+    set showcmd
+endif
+
+"let Vundle manage Vundle
 " required!
 Bundle 'gmarik/vundle'
 
@@ -19,6 +70,15 @@ Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'klen/python-mode'
+"Bundle 'Townk/vim-autoclose'
+Bundle 'Raimondi/delimitMate'
+Bundle 'hallettj/jslint.vim'
+Bundle 'tsaleh/vim-supertab'
+Bundle 'tpope/vim-surround'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'vim-scripts/vim-json-bundle'
+Bundle 'tpope/vim-markdown'
+
 
 " The rest of your config follows here
 
@@ -78,5 +138,20 @@ augroup END
 
 if has ('gui_running')
     highlight Pmenu guibg=#cccccc gui=bold
+endif
+
+" omnicomplete settings
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+if v:version >= 730
+    set backup
+    set undofile
+    set undolevels=500
+    set undoreload=1000
+    au BufWinLeave * silent! mkview " makes vim save view states
+    au BufWinEnter * silent! loadview " makes vim load saved view states
 endif
 
