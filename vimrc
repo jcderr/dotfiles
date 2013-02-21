@@ -7,7 +7,7 @@ call vundle#rc()
 syntax on
 set mouse=a
 set history=500
-set spell
+"set spell!
 "color solarized
 set tabpagemax=15
 set showmode
@@ -28,7 +28,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set softtabstop=4
-"set pastetoggle=<F12>   " sane indentation on paste, tends to be insane
+set pastetoggle=<F12>   " sane indentation on paste, tends to be insane
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
     " remove trailing whitespace & ^M chars
 
