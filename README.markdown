@@ -1,21 +1,15 @@
-# jcderr-devenvironment
+# jcderr-workspace
 
 This project does various things to set up a python dev environment
 
 Currently, it installs a handful of ubuntu packages, and then sets up
-a highly customized "ultimate" vimrc configuration.
+a highly customized vimrc configuration.
 
 More to come
 
 # INSTALLATION
 
-    wget -O- http://code.derr.me/devenvironment/raw/mac-local/bootstrap.sh | sh
-
-# Commentary
-
-The mac-local branch is the same as linux-local, but with Powerline disabled, as Powerline seems to conflict with
-NerdTree and causes a segfault when VIM is loaded with no buffer (i.e. `vim` with no file specified). I look to
-add this support in the future.
+    wget -O- https://raw.github.com/jcderr/workspace/master/bootstrap.sh | sh
 
 # Python Mode Settings
 
