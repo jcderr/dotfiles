@@ -32,6 +32,9 @@ set pastetoggle=<F12>   " sane indentation on paste, tends to be insane
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
     " remove trailing whitespace & ^M chars
 
+" set md files to be interp as markdown
+au BufNewFile,BufRead *.md set filetype=markdown
+
 " other stuff
 let mapleader = ','
 nnoremap ; :
@@ -78,7 +81,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/vim-json-bundle'
 Bundle 'tpope/vim-markdown'
-
+"Bundle 'jcderr/vim-jekyll'
+Bundle 'Valloric/YouCompleteMe'
 
 " The rest of your config follows here
 
@@ -155,3 +159,19 @@ if v:version >= 730
     au BufWinEnter * silent! loadview " makes vim load saved view states
 endif
 
+func! WordProcessorMode() 
+    setlocal formatoptions=1 
+    setlocal noexpandtab 
+    map j gj 
+    map k gk
+    setlocal spell spelllang=en_us 
+    set thesaurus+=/Users/sbrown/.vim/thesaurus/mthesaur.txt
+    set complete+=s
+    set formatprg=par
+    setlocal wrap 
+    setlocal linebreak 
+endfu 
+
+com!            WP      call    WordProcessorMode()
+
+nnoremap <C-P> :Pub

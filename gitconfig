@@ -1,0 +1,66 @@
+[user]
+	name = Jeremy Derr
+	email = jeremy@derr.me
+[core]
+	excludesfile = /Users/jeremy.derr/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[alias]
+    st = status -sb
+    # various logs
+    lg = log --pretty=format:'%Cred%h%Creset -%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+        # with changed files
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+        # with dates, short
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+        # with dates, long
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+        # default short git log
+    le = log --oneline --decorate
+
+        # file log
+    fl = log -u
+
+    # diffs
+        # files modified since last commit
+    dl = "!git ll -1"
+
+        # diff last commit
+    dlc = diff --cached HEAD^
+
+        # diff revision
+    dr  = "!f() { git diff "$1"^.."$1"; }; f"
+    lc  = "!f() { git ll "$1"^.."$1"; }; f"
+    diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+
+    # find 
+        # file in codebase
+    f = "!git ls-files | grep -i"
+
+        # grep codebase
+    grep = grep -Ii
+
+    # list aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+    
+    # assumptions
+        # assume file
+    assume = update-index --assume-unchanged
+        # unassume file
+    unassume = update-index --no-assume-unchanged
+        # list assumed files
+    assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+    unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+    assumeall = "!git st -s | awk {'print $2'} | xargs git assume"
+
+    # rebase!
+    ready = rebase -i @{u}
+
+[push]
+    default = simple
+
