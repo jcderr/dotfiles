@@ -42,3 +42,12 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga
 if [ -e ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
+
+function yesterworkday() 
+{ 
+    if [[ "1" == "$(date +%u)" ]]; then 
+        echo "last friday"
+    else
+        echo "yesterday"
+    fi
+}

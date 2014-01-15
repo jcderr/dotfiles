@@ -3,6 +3,7 @@ filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+set backspace=indent,eol,start
 
 syntax on
 set mouse=a
@@ -82,7 +83,8 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/vim-json-bundle'
 Bundle 'tpope/vim-markdown'
 "Bundle 'jcderr/vim-jekyll'
-Bundle 'Valloric/YouCompleteMe'
+""undle 'Valloric/YouCompleteMe'
+Bundle 'markcornick/vim-vagrant'
 
 " The rest of your config follows here
 

@@ -1,8 +1,8 @@
 [user]
 	name = Jeremy Derr
-	email = jeremy@derr.me
+	email = jcderr@djed.com
 [core]
-	excludesfile = /Users/jeremy.derr/.gitignore_global
+	excludesfile = /Users/jcderr/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -30,6 +30,8 @@
 
         # file log
     fl = log -u
+
+    ly = log --pretty=tformat:"%C(yellow)%h%C(auto)%d\\ %C(reset)%s%C(blue)\\ %C(yellow)[%C(bold\\ green)%cN%C(reset)%C(yellow)]%C(reset)" --decorate --numstat --since=$(yesterworkday) --until=today
 
     # diffs
         # files modified since last commit
