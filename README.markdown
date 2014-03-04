@@ -9,11 +9,7 @@ More to come
 
 # INSTALLATION
 
-    wget -O- https://raw.github.com/jcderr/workspace/master/bootstrap.sh | sh
-
-or
-
-    curl -s https://raw.github.com/jcderr/workspace/master/bootstrap.sh | sh
+    curl -Lo- https://raw.github.com/jcderr/workspace/master/bootstrap.sh | sh
 
 # Python Mode Settings
 

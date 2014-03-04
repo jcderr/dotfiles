@@ -1,3 +1,5 @@
+[ -z "$PS1" ] && return
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -51,3 +53,14 @@ function yesterworkday()
         echo "yesterday"
     fi
 }
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+if [ "$(which tmux)" ]; then
+    alias tmux="$(which tmux) -f ${HOME}/.tmux.conf"
+
+    if [[ ! $TERM == 'screen' ]] || ! "${TMUX}"; then
+        tmux attach-session || tmux new-session
+    fi
+fi
