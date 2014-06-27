@@ -29,7 +29,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set softtabstop=4
-set pastetoggle=<F12>   " sane indentation on paste, tends to be insane
+set pastetoggle=<F11>   " sane indentation on paste, tends to be insane
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
     " remove trailing whitespace & ^M chars
 
@@ -85,7 +85,7 @@ Bundle 'tpope/vim-markdown'
 "Bundle 'jcderr/vim-jekyll'
 ""undle 'Valloric/YouCompleteMe'
 Bundle 'markcornick/vim-vagrant'
-
+Bundle 'vim-ruby/vim-ruby'
 " The rest of your config follows here
 
 " Mappings
@@ -113,7 +113,7 @@ let g:pymode_rope = 1
 let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
 let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
+" let g:pymode_lint_checker = "pyflakes,pep8"
 let g:pymode_lint_write = 1
 let g:pymode_virtualenv = 1
 let g:pymode_breakpoint = 1

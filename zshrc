@@ -7,7 +7,23 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="gallifrey"
+#ZSH_THEME="gallifrey"
+
+function powerline_precmd() {
+    export PS1="$(~/.devenv/powerline-shell/powerline-shell.py $? --shell zsh 2> /dev/null)"
+}
+
+function install_powerline_precmd() {
+    for s in "${precmd_functions[@]}"; do
+        if [ "$s" = "powerline_precmd" ]; then
+            return
+        fi
+    done
+
+    precmd_functions+=(powerline_precmd)
+}
+
+install_powerline_precmd
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -34,7 +50,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git osx docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -55,12 +71,4 @@ function yesterworkday()
 }
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-if [ "$(which tmux)" ]; then
-    alias tmux="$(which tmux) -f ${HOME}/.tmux.conf"
-
-    if [[ ! $TERM == 'screen' ]] || ! "${TMUX}"; then
-        tmux attach-session || tmux new-session
-    fi
-fi
+export PATH="/usr/local/heroku/bin:$PATH:~/src/djed/bin"
