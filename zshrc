@@ -7,10 +7,14 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="gallifrey"
+if [[ -z "$TERM_PROGRAM" ]]; then
+    ZSH_THEME="arrow"
+fi
 
 function powerline_precmd() {
-    export PS1="$(~/.devenv/powerline-shell/powerline-shell.py $? --shell zsh 2> /dev/null)"
+    if [[ -n "$TERM_PROGRAM" ]]; then
+        export PS1="$(~/.devenv/powerline-shell/powerline-shell.py $? --colorize-hostname --shell zsh 2> /dev/null)"
+    fi
 }
 
 function install_powerline_precmd() {
@@ -30,7 +34,7 @@ install_powerline_precmd
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
@@ -42,7 +46,7 @@ install_powerline_precmd
 # DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
