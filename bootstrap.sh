@@ -9,7 +9,7 @@ die() {
     exit 1
 }
 
-echo "thanks for installing jcderr/workspace"
+echo "thanks for installing jcderr/dotfiles"
 
 if [ -x /usr/bin/apt-get ]; then
     sudo apt-get -qq update
@@ -24,7 +24,7 @@ for i in ~/.vim ~/.vimrc ~/.gvimrc; do [ -e $i ] && mv $i $i.old; done
 
 
 echo "cloning jcderr/workspace\n"
-git clone --recursive https://github.com/jcderr/workspace.git ~/.devenv
+git clone --recursive https://github.com/jcderr/dotfiles.git ~/.devenv
 ln -s ~/.devenv/vimrc ~/.vimrc
 ln -s ~/.devenv/vim ~/.vim
 
