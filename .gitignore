@@ -3,8 +3,9 @@
 *._*
 *.vim/sessions/
 *.swp
-vim/bundle/nerdtree/
-vim/bundle/powerline/
-vim/bundle/python-mode/
-vim/bundle/vim-fugitive/
+vim/bundle/
+vim/bundle/
+vim/bundle/
+vim/bundle/
+!vim/bundle/vundle
 
