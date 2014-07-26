@@ -18,6 +18,8 @@ if [ -x /usr/bin/apt-get ]; then
         nano zsh 
 fi
 
+sudo pip install reattach-to-user-namespace
+
 # Backup existing .vim stuff
 echo "backing up current vim config\n"
 for i in ~/.vim ~/.vimrc ~/.gvimrc; do [ -e $i ] && mv $i $i.old; done
