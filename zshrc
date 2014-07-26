@@ -76,3 +76,48 @@ function yesterworkday()
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH:~/src/djed/bin"
+
+
+export EDITOR=/usr/local/bin/vim
+alias v=vagrant
+
+eval "`pip completion --zsh`"
+
+tmux list-sessions
+SESS=$?
+
+TMUXES=`ps auxwww | grep -c tmux`
+
+if [[ -n "$TERM_PROGRAM" ]] && [[ $SESS -ne 0 ]]; then
+    tmux -f ~/.tmux.conf
+elif [[ -n "$TERM_PROGRAM" ]] && [[ $SESS == 0 ]]; then
+    if [ $TMUXES -lt 3 ]; then
+        tmux attach-session -d
+    else
+        tmux new-session
+    fi
+fi
+
+export PATH="${HOME}/.rbenv/bin:${PATH}:${HOME}/src/djed/bin"
+eval "$(rbenv init -)"
+
+dlip() {
+    docker inspect $(docker ps -lq) | grep IPAddress | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }'
+}
+
+dkl() {
+    docker stop $(docker ps -lq) && docker rm $(docker ps -lq)
+}
+
+dtopl() {
+    docker top $(docker ps -lq)
+}
+
+ebconn() {
+    ssh ec2-user@${1} -i ~/.ssh/salt-minions -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+}
+
+if (( $(ps auxwww | grep pasteboard-fix | wc -l) <= 1 )) 
+then
+    nohup ~/.dotfiles/mac-tmux-pasteboard-fix.sh > /dev/null 2>&1 &
+fi
