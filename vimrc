@@ -1,6 +1,8 @@
 set nocompatible
 filetype off
 
+set clipboard=unnamed
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 set backspace=indent,eol,start
