@@ -109,6 +109,11 @@ if [[ -e `which rbenv` ]]; then
     eval "$(rbenv init -)"
 fi
 
+if [[ -e "/opt/env/bin/activate" ]]; then
+    source /opt/env/bin/activate
+    [[ -e "/opt/app" ]] && cd /opt/app
+fi
+
 dlip() {
     docker inspect $(docker ps -lq) | grep IPAddress | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }'
 }
