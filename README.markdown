@@ -1,4 +1,4 @@
-# jcderr-workspace
+# jcderr-dotfiles
 
 This project does various things to set up a python dev environment
 
