@@ -13,7 +13,7 @@ fi
 
 function powerline_precmd() {
     if [[ -n "$TERM_PROGRAM" ]]; then
-        export PS1="$(~/.devenv/powerline-shell/powerline-shell.py $? --colorize-hostname --shell zsh 2> /dev/null)"
+        export PS1="$(~/.dotfiles/powerline-shell/powerline-shell.py $? --colorize-hostname --shell zsh 2> /dev/null)"
     fi
 }
 
