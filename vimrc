@@ -108,7 +108,7 @@ map <F12> :BundleInstall<CR>
 
 " toggles whitespace display, and sets the chars to show
 nmap <leader>l :set list!
-set listchars=tab:»\ ,eol:¬
+" set listchars=tab:»\ ,eol:¬
 
 " Python Mode
 let g:pymode_rope = 1
