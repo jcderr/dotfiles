@@ -26,7 +26,7 @@ for i in ~/.vim ~/.vimrc ~/.gvimrc; do [ -e $i ] && mv $i $i.old; done
 
 
 echo "cloning jcderr/workspace\n"
-git clone --recursive https://github.com/jcderr/dotfiles.git ~/.devenv
+git clone --recursive https://github.com/jcderr/dotfiles.git ~/.dotfiles
 ln -s ~/.dotfiles/vimrc ~/.vimrc
 ln -s ~/.dotfiles/vim ~/.vim
 ln -s ~/.dotfiles/zshrc ~/.zshrc
