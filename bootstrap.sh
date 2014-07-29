@@ -14,7 +14,7 @@ echo "thanks for installing jcderr/dotfiles"
 if [ -x /usr/bin/apt-get ]; then
     sudo apt-get -qq update
     sudo apt-get install -y git-core build-essential vim python-setuptools \
-        python-pip python-virtualenv ruby rake rubygems ruby-dev ctags \
+        python-pip python-virtualenv ruby rake ruby-dev ctags \
         nano zsh 
 fi
 
