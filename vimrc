@@ -181,3 +181,5 @@ com!            WP      call    WordProcessorMode()
 nnoremap <C-P> :Pub
 
 let g:pymode_rope_lookup_project = 0
+
+set encoding=utf-8

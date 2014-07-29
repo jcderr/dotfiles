@@ -129,3 +129,10 @@ dtopl() {
 ebconn() {
     ssh ec2-user@${1} -i ~/.ssh/salt-minions -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 }
+
+statuscode () {
+    curl -o /dev/null --silent --head --write-out '%{http_code}\n' $1
+}
+
+
+
