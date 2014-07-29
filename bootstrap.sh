@@ -9,8 +9,6 @@ die() {
     exit 1
 }
 
-echo "thanks for installing jcderr/dotfiles"
-
 if [ -x /usr/bin/apt-get ]; then
     sudo apt-get -qq update
     sudo apt-get install -y git-core build-essential vim python-setuptools \
@@ -25,10 +23,12 @@ echo "backing up current vim config\n"
 for i in ~/.vim ~/.vimrc ~/.gvimrc; do [ -e $i ] && mv $i $i.old; done
 
 
-echo "cloning jcderr/workspace\n"
+echo "cloning jcderr/dotfiles\n"
 git clone --recursive https://github.com/jcderr/dotfiles.git ~/.dotfiles
 ln -s ~/.dotfiles/vimrc ~/.vimrc
 ln -s ~/.dotfiles/vim ~/.vim
 ln -s ~/.dotfiles/zshrc ~/.zshrc
 ln -s ~/.dotfiles/oh-my-zsh ~/.oh-my-zsh
 cd ~/.dotfiles/powerline-fonts && python ./install.py
+
+echo "thanks for installing jcderr/dotfiles"
