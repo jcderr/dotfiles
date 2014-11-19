@@ -7,12 +7,12 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-if [[ -z "$TERM_PROGRAM" ]]; then
+if [[ -z "$TERM_PROGRAM" ]] || [[ "$TERM" == xterm-color256 ]]; then
     ZSH_THEME="arrow"
 fi
 
 function powerline_precmd() {
-    if [[ -n "$TERM_PROGRAM" ]]; then
+    if [[ -n "$TERM_PROGRAM" ]] || [[ "$TERM" == "screen-256color" ]]; then
         export PS1="$(~/.dotfiles/powerline-shell/powerline-shell.py $? --colorize-hostname --shell zsh 2> /dev/null)"
     fi
 }
