@@ -77,13 +77,17 @@ function yesterworkday()
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH:~/src/djed/bin"
 
+if [[ -e "/usr/local/bin/vim" ]]; then
+    export EDITOR=/usr/local/bin/vim
+else
+    export EDITOR=$(which vim)
+fi
 
-export EDITOR=/usr/local/bin/vim
 [[ -e `which vagrant` ]] && alias v=vagrant
 
 eval "`pip completion --zsh`"
 
-if [[ -e `which tmux` ]]; then
+if [[ -e `which tmux` ]] && [[ -e "/System/Library/" ]]; then
     tmux list-sessions
     SESS=$?
 
@@ -99,7 +103,7 @@ if [[ -e `which tmux` ]]; then
         fi
     fi
     
-    if (( $(ps auxwww | grep pasteboard-fix | wc -l) <= 1 )); then
+    if [[ -e "/System/Library" ]] && (( $(ps auxwww | grep pasteboard-fix | wc -l) <= 1 )); then
         nohup ~/.dotfiles/mac-tmux-pasteboard-fix.sh > /dev/null 2>&1 &
     fi
 fi
