@@ -7,12 +7,12 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-if [[ -z "$TERM_PROGRAM" ]]; then
+if [[ -z "$TERM_PROGRAM" ]] || [[ "$TERM" == xterm-color256 ]]; then
     ZSH_THEME="arrow"
 fi
 
 function powerline_precmd() {
-    if [[ -n "$TERM_PROGRAM" ]]; then
+    if [[ -n "$TERM_PROGRAM" ]] || [[ "$TERM" == "screen-256color" ]]; then
         export PS1="$(~/.dotfiles/powerline-shell/powerline-shell.py $? --colorize-hostname --shell zsh 2> /dev/null)"
     fi
 }
@@ -77,13 +77,17 @@ function yesterworkday()
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH:~/src/djed/bin"
 
+if [[ -e "/usr/local/bin/vim" ]]; then
+    export EDITOR=/usr/local/bin/vim
+else
+    export EDITOR=$(which vim)
+fi
 
-export EDITOR=/usr/local/bin/vim
 [[ -e `which vagrant` ]] && alias v=vagrant
 
 eval "`pip completion --zsh`"
 
-if [[ -e `which tmux` ]]; then
+if [[ -e `which tmux` ]] && [[ -e "/System/Library/" ]]; then
     tmux list-sessions
     SESS=$?
 
@@ -99,7 +103,7 @@ if [[ -e `which tmux` ]]; then
         fi
     fi
     
-    if (( $(ps auxwww | grep pasteboard-fix | wc -l) <= 1 )); then
+    if [[ -e "/System/Library" ]] && (( $(ps auxwww | grep pasteboard-fix | wc -l) <= 1 )); then
         nohup ~/.dotfiles/mac-tmux-pasteboard-fix.sh > /dev/null 2>&1 &
     fi
 fi
