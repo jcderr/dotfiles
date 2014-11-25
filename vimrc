@@ -27,10 +27,17 @@ set foldenable!
 " formatting
 set nowrap
 set autoindent
-set tabstop=4
-set shiftwidth=4
+
+if &filetype == 'yaml'
+    set tabstop=2
+    set shiftwidth=2
+    set softtabstop=2
+else
+    set tabstop=4
+    set shiftwidth=4
+    set softtabstop=4
+endif
 set expandtab
-set softtabstop=4
 set pastetoggle=<F11>   " sane indentation on paste, tends to be insane
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
     " remove trailing whitespace & ^M chars
