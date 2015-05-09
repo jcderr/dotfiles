@@ -75,7 +75,7 @@ function yesterworkday()
 }
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH:~/src/djed/bin"
+export PATH="/usr/local/heroku/bin:$PATH"
 
 if [[ -e "/usr/local/bin/vim" ]]; then
     export EDITOR=/usr/local/bin/vim
@@ -117,22 +117,6 @@ if [[ -e "/opt/env/bin/activate" ]]; then
     source /opt/env/bin/activate
     [[ -e "/opt/app" ]] && cd /opt/app
 fi
-
-dlip() {
-    docker inspect $(docker ps -lq) | grep IPAddress | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }'
-}
-
-dkl() {
-    docker stop $(docker ps -lq) && docker rm $(docker ps -lq)
-}
-
-dtopl() {
-    docker top $(docker ps -lq)
-}
-
-ebconn() {
-    ssh ec2-user@${1} -i ~/.ssh/salt-minions -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
-}
 
 statuscode () {
     curl -o /dev/null --insecure --silent --head --write-out '%{http_code}\n' $1
