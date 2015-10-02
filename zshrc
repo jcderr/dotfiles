@@ -1,5 +1,7 @@
 [ -z "$PS1" ] && return
 
+export PYTHONDONTWRITEBYTECODE=1
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -54,28 +56,15 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx docker)
+plugins=(git osx docker python pip tmux aws fabric pep8 pylint redis-cli ssh-agent sudo)
 
 source $ZSH/oh-my-zsh.sh
 
+
+export GOPATH=${HOME}/src/_go
+
 # Customize to your needs...
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-
-if [ -e ~/.zshrc.local ]; then
-    source ~/.zshrc.local
-fi
-
-function yesterworkday() 
-{ 
-    if [[ "1" == "$(date +%u)" ]]; then 
-        echo "last friday"
-    else
-        echo "yesterday"
-    fi
-}
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH:~/src/djed/bin"
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:${GOPATH}/bin
 
 if [[ -e "/usr/local/bin/vim" ]]; then
     export EDITOR=/usr/local/bin/vim
@@ -83,60 +72,17 @@ else
     export EDITOR=$(which vim)
 fi
 
-[[ -e `which vagrant` ]] && alias v=vagrant
-
 eval "`pip completion --zsh`"
 
-if [[ -e `which tmux` ]] && [[ -e "/System/Library/" ]]; then
-    tmux list-sessions
-    SESS=$?
+export WORKON_HOME=~/.envs/
+. /usr/local/bin/virtualenvwrapper.sh
 
-    TMUXES=`ps auxwww | grep -c tmux`
+source /Users/jcderr/.iterm2_shell_integration.zsh
+source ~/.dotfiles/aliases
+source ~/.dotfiles/func
 
-    if [[ -n "$TERM_PROGRAM" ]] && [[ $SESS -ne 0 ]]; then
-        tmux -f ~/.tmux.conf
-    elif [[ -n "$TERM_PROGRAM" ]] && [[ $SESS == 0 ]]; then
-        if [ $TMUXES -lt 3 ]; then
-            tmux attach-session -d
-        else
-            tmux new-session
-        fi
-    fi
-    
-    if [[ -e "/System/Library" ]] && (( $(ps auxwww | grep pasteboard-fix | wc -l) <= 1 )); then
-        nohup ~/.dotfiles/mac-tmux-pasteboard-fix.sh > /dev/null 2>&1 &
-    fi
+if [ -e ~/.zshrc.local ]; then
+    source ~/.zshrc.local
 fi
 
-if [[ -e `which rbenv` ]]; then
-    export PATH="${HOME}/.rbenv/bin:${PATH}:${HOME}/src/djed/bin"
-    eval "$(rbenv init -)"
-fi
-
-if [[ -e "/opt/env/bin/activate" ]]; then
-    source /opt/env/bin/activate
-    [[ -e "/opt/app" ]] && cd /opt/app
-fi
-
-dlip() {
-    docker inspect $(docker ps -lq) | grep IPAddress | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }'
-}
-
-dkl() {
-    docker stop $(docker ps -lq) && docker rm $(docker ps -lq)
-}
-
-dtopl() {
-    docker top $(docker ps -lq)
-}
-
-ebconn() {
-    ssh ec2-user@${1} -i ~/.ssh/salt-minions -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
-}
-
-statuscode () {
-    curl -o /dev/null --insecure --silent --head --write-out '%{http_code}\n' $1
-}
-
-
-
+tmux
