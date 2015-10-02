@@ -1,0 +1,8 @@
+alias v=vagrant
+
+alias d=docker
+alias dr="docker run"
+alias dp="docker ps"
+alias dc="docker-compose"
+
+alias kct=kubectl

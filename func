@@ -1,0 +1,86 @@
+# logging convenience
+autoload colors
+
+if [[ "$terminfo[colors]" -gt 8 ]]; then
+    colors
+fi
+
+for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
+    eval ${COLOR}='$fg_no_bold[${(L)COLOR}]'
+    eval BOLD_${COLOR}='$fg_bold[${(L)COLOR}]'
+done
+
+function error() {
+    echo "${RED}[ERROR] ${1}${RESET}"
+}
+
+function info() {
+    echo "${CYAN}[INFO] ${1}${RESET}"
+}
+
+eval RESET='$reset_color'
+
+# call URL, print status code
+statuscode () {
+    info "http.status_code = $(curl -o /dev/null --insecure --silent --head --write-out '%{http_code}' $1)"
+}
+
+# flush dns cache
+flush_dns() {
+    sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;info "DNS Flushed"
+}
+
+# load an environment file from ~/.zsh.envs
+environ() {
+    _environ=$1
+    [[ -n "$1" ]] || error "Please specify an environment."
+
+    [[ -e "${HOME}/.zsh.envs/$1" ]] || error "Environment not found: $1"
+
+    info "Activating $1..."
+    . ~/.zsh.envs/$1
+    export ENVIRON_NAME=$1
+}
+
+# terminate an EC2 instance
+terminate() {
+    [[ -n "$1" ]] || error "Please provide an instance id"
+    aws ec2 terminate-instances --instance-id $1
+}
+
+# enter a kube pod
+kubeexec(){
+    IP="`kubectl describe pod $1|grep '^Node'|cut -d/ -f2`"
+    IMAGE="`kubectl describe pod $1|grep '^Image'|awk '{print $2}'`"
+    ID=`ssh -l core "$IP" docker ps | awk '$2 == "'"$IMAGE"'" {print $1}'`
+    ssh -l core -t "$IP" docker exec -ti "$ID" bash
+}
+
+# scale a kube rc
+scale() {
+    RC=$1
+    QTY=$2
+
+    if [ -n "$RC" ] && [ -n "$QTY" ]; then
+        kubectl scale rc/$RC --replicas=$QTY > /dev/null 2>&1
+    else
+        error "Please specify an RC and a quantity."
+    fi
+
+    info "Scaled $1 to $2"
+}
+
+# bounce a pod by scaling it to 0, then back to 1
+kbounce() {
+    info "Scaling out..."
+    scale $1 0 > /dev/null 2>&1 || error "Failed to scale out!"
+    sleep 5
+    info "Scaling in..."
+    scale $1 1 > /dev/null 2>&1 || error "Failed to scale in!"
+}
+
+# get pods logs
+klog() {
+    kubectl logs $1
+}
+
