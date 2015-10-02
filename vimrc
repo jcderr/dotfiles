@@ -28,6 +28,16 @@ set foldenable!
 set nowrap
 set autoindent
 
+set expandtab
+set pastetoggle=<F11>   " sane indentation on paste, tends to be insane
+autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+    " remove trailing whitespace & ^M chars
+
+au BufNewFile,BufRead *.yaml,*.yml set filetype=ansible
+
+filetype plugin indent on
+autocmd FileType yaml setl indentkeys-=<:>
+
 if &filetype == 'yaml'
     set tabstop=2
     set shiftwidth=2
@@ -37,10 +47,6 @@ else
     set shiftwidth=4
     set softtabstop=4
 endif
-set expandtab
-set pastetoggle=<F11>   " sane indentation on paste, tends to be insane
-autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-    " remove trailing whitespace & ^M chars
 
 " set md files to be interp as markdown
 au BufNewFile,BufRead *.md set filetype=markdown
@@ -92,9 +98,11 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/vim-json-bundle'
 Bundle 'tpope/vim-markdown'
 "Bundle 'jcderr/vim-jekyll'
-""undle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'markcornick/vim-vagrant'
 Bundle 'vim-ruby/vim-ruby'
+Bundle 'chase/vim-ansible-yaml'
+"Bundle 'ingydotnet/yaml-vim'
 " The rest of your config follows here
 
 " Mappings
@@ -118,7 +126,7 @@ nmap <leader>l :set list!
 " set listchars=tab:»\ ,eol:¬
 
 " Python Mode
-let g:pymode_rope = 1
+let g:pymode_rope = 0
 let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
 let g:pymode_lint = 1
