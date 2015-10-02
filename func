@@ -84,3 +84,6 @@ klog() {
     kubectl logs $1
 }
 
+s() {
+    cd ~/src/$1
+}
