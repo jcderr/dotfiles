@@ -87,3 +87,7 @@ klog() {
 s() {
     cd ~/src/$1
 }
+
+e() {
+    cd ~/src/_env/$1
+}
