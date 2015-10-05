@@ -85,9 +85,17 @@ klog() {
 }
 
 s() {
-    cd ~/src/$1
+    if [ -n "$1" ]; then
+        cd ~/src/$1
+    else
+        ls ~/src/
+    fi
 }
 
 e() {
-    cd ~/src/_env/$1
+    if [ -n "$1" ]; then
+        cd ~/src/_env/$1
+    else
+        ls ~/src/_env
+    fi
 }
