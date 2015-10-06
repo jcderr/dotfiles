@@ -99,3 +99,14 @@ e() {
         ls ~/src/_env
     fi
 }
+
+# docker convenience
+dbp() {
+    # docker build and push
+    CWD=${PWD##*/}
+    [ -n "${DOCKER_REGISTRY_HOST}" ] || die "DOCKER_REGISTRY_HOST must be set."
+    image_name="${DOCKER_REGISTRY_HOST}/${CWD}"
+    [ -n "${1}" ] && image_name="{image_name}:${1}"
+    docker build -t ${image_name} .
+    docker push ${image_name}
+}
