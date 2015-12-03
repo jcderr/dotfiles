@@ -6,3 +6,8 @@ alias dp="docker ps"
 alias dc="docker-compose"
 
 alias kct=kubectl
+alias kanye="kubectl config use-context west"
+alias aggie="kubectl config use-context agg"
+alias ogops="kubectl config use-context prevgen"
+alias og="kubectl config use-context default"
+alias westops="kubectl config use-context westops"
