@@ -13,3 +13,6 @@
 [submodule "powerline-shell"]
 	path = powerline-shell
 	url = https://github.com/milkbikis/powerline-shell
+[submodule "tmux-scroll-copy-mode"]
+	path = tmux-scroll-copy-mode
+	url = https://github.com/nhdaly/tmux-scroll-copy-mode
