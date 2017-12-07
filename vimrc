@@ -89,20 +89,16 @@ Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'klen/python-mode'
-"Bundle 'Townk/vim-autoclose'
 Bundle 'Raimondi/delimitMate'
 Bundle 'hallettj/jslint.vim'
-Bundle 'tsaleh/vim-supertab'
 Bundle 'tpope/vim-surround'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/vim-json-bundle'
 Bundle 'tpope/vim-markdown'
-"Bundle 'jcderr/vim-jekyll'
-"Bundle 'Valloric/YouCompleteMe'
 Bundle 'markcornick/vim-vagrant'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'chase/vim-ansible-yaml'
-"Bundle 'ingydotnet/yaml-vim'
+
 " The rest of your config follows here
 
 " Mappings
@@ -170,7 +166,9 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 if v:version >= 730
-    set backup
+    set nobackup
+    set nowritebackup
+
     set undofile
     set undolevels=500
     set undoreload=1000
