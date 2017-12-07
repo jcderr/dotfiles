@@ -74,15 +74,21 @@ fi
 
 eval "`pip completion --zsh`"
 
-export WORKON_HOME=~/.envs/
-. /usr/local/bin/virtualenvwrapper.sh
+#export WORKON_HOME=~/.envs/
+#. /usr/local/bin/virtualenvwrapper.sh
 
-source /Users/jcderr/.iterm2_shell_integration.zsh
-source ~/.dotfiles/aliases
-source ~/.dotfiles/func
+if [[ -e /Users/jcderr/.iterm2_shell_integration.zsh ]]; then
+    source /Users/jcderr/.iterm2_shell_integration.zsh
+fi
 
-if [ -e ~/.zshrc.local ]; then
+for FILENAME in ${HOME}/.dotfiles/aliases ${HOME}/.dotfiles/func; do
+    if [[ -e ${FILENAME} ]]; then
+        source ${FILENAME}
+    fi
+done
+
+if [[ -e ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
 
-tmux
+#tmux
