@@ -56,7 +56,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx docker python pip tmux aws fabric pep8 pylint redis-cli ssh-agent sudo)
+plugins=(git osx docker aws fabric ssh-agent sudo)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -64,7 +64,7 @@ source $ZSH/oh-my-zsh.sh
 export GOPATH=${HOME}/src/_go
 
 # Customize to your needs...
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:${GOPATH}/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:${GOPATH}/bin:${HOME}/.dotfiles/bin
 
 if [[ -e "/usr/local/bin/vim" ]]; then
     export EDITOR=/usr/local/bin/vim
@@ -72,7 +72,7 @@ else
     export EDITOR=$(which vim)
 fi
 
-eval "`pip completion --zsh`"
+eval "`pip3 completion --zsh`"
 
 export WORKON_HOME=~/.envs/
 . /usr/local/bin/virtualenvwrapper.sh
@@ -86,3 +86,9 @@ if [ -e ~/.zshrc.local ]; then
 fi
 
 tmux
+
+# The next line updates PATH for the Google Cloud SDK.
+# source '/Users/jcderr/Downloads/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+# source '/Users/jcderr/Downloads/google-cloud-sdk/completion.zsh.inc'

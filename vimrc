@@ -23,6 +23,8 @@ set whichwrap=b,s,h,l,<,>,[,]
 set scrolljump=5
 set scrolloff=3
 set foldenable!
+set nobackup
+set nowritebackup
 
 " formatting
 set nowrap
@@ -198,3 +200,6 @@ nnoremap <C-P> :Pub
 let g:pymode_rope_lookup_project = 0
 
 set encoding=utf-8
+
+set nobk nowb noswf noudf " nobackup nowritebackup noswapfile noundofile
+
