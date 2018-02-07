@@ -74,21 +74,19 @@ fi
 
 eval "`pip3 completion --zsh`"
 
-export WORKON_HOME=~/.envs/
-. /usr/local/bin/virtualenvwrapper.sh
+#export WORKON_HOME=~/.envs/
+#. /usr/local/bin/virtualenvwrapper.sh
 
-source /Users/jcderr/.iterm2_shell_integration.zsh
-source ~/.dotfiles/aliases
-source ~/.dotfiles/func
-
-if [ -e ~/.zshrc.local ]; then
-    source ~/.zshrc.local
+if [[ -e /Users/jcderr/.iterm2_shell_integration.zsh ]]; then
+    source /Users/jcderr/.iterm2_shell_integration.zsh
 fi
 
-tmux
+for FILENAME in ${HOME}/.dotfiles/aliases ${HOME}/.dotfiles/func; do
+    if [[ -e ${FILENAME} ]]; then
+        source ${FILENAME}
+    fi
+done
 
-# The next line updates PATH for the Google Cloud SDK.
-# source '/Users/jcderr/Downloads/google-cloud-sdk/path.zsh.inc'
-
-# The next line enables shell command completion for gcloud.
-# source '/Users/jcderr/Downloads/google-cloud-sdk/completion.zsh.inc'
+if [[ -e ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
+fi
