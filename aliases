@@ -1,14 +1,3 @@
-alias v=vagrant
-
-alias d=docker
-alias dr="docker run"
-alias dp="docker ps"
-alias dc="docker-compose"
-
-alias kct=kubectl
-alias kanye="kubectl config use-context west"
-alias aggie="kubectl config use-context agg"
-alias ogops="kubectl config use-context prevgen"
-alias og="kubectl config use-context default"
-alias westops="kubectl config use-context westops"
-alias k8sys="kubectl --namespace=kube-system"
+alias vim="/usr/local/bin/vim"
+# alias python="/usr/local/bin/python3"
+# alias pip="/usr/local/bin/pip3"

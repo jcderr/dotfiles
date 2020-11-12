@@ -3,7 +3,7 @@
 export PYTHONDONTWRITEBYTECODE=1
 
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+ZSH=${HOME}/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -14,22 +14,23 @@ if [[ -z "$TERM_PROGRAM" ]] || [[ "$TERM" == xterm-color256 ]]; then
 fi
 
 function powerline_precmd() {
-    if [[ -n "$TERM_PROGRAM" ]] || [[ "$TERM" == "screen-256color" ]]; then
-        export PS1="$(~/.dotfiles/powerline-shell/powerline-shell.py $? --colorize-hostname --shell zsh 2> /dev/null)"
-    fi
+    PS1="$(powerline-shell --shell zsh $?)"
 }
 
 function install_powerline_precmd() {
-    for s in "${precmd_functions[@]}"; do
-        if [ "$s" = "powerline_precmd" ]; then
-            return
-        fi
-    done
-
-    precmd_functions+=(powerline_precmd)
+  for s in "${precmd_functions[@]}"; do
+    if [ "$s" = "powerline_precmd" ]; then
+      return
+    fi
+  done
+  precmd_functions+=(powerline_precmd)
 }
 
-install_powerline_precmd
+if [ "$TERM" != "linux" ]; then
+    install_powerline_precmd
+fi
+
+export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -77,8 +78,8 @@ eval "`pip3 completion --zsh`"
 #export WORKON_HOME=~/.envs/
 #. /usr/local/bin/virtualenvwrapper.sh
 
-if [[ -e /Users/jcderr/.iterm2_shell_integration.zsh ]]; then
-    source /Users/jcderr/.iterm2_shell_integration.zsh
+if [[ -e /Users/jderr/.iterm2_shell_integration.zsh ]]; then
+    source /Users/jderr/.iterm2_shell_integration.zsh
 fi
 
 for FILENAME in ${HOME}/.dotfiles/aliases ${HOME}/.dotfiles/func; do
@@ -89,4 +90,10 @@ done
 
 if [[ -e ~/.zshrc.local ]]; then
     source ~/.zshrc.local
+fi
+
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
 fi
