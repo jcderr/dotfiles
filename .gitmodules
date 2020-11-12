@@ -16,3 +16,6 @@
 [submodule "tmux-scroll-copy-mode"]
 	path = tmux-scroll-copy-mode
 	url = https://github.com/nhdaly/tmux-scroll-copy-mode
+[submodule "solarized"]
+	path = solarized
+	url = git@github.com:jcderr/solarized.git
