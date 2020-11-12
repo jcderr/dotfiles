@@ -78,8 +78,8 @@ eval "`pip3 completion --zsh`"
 #export WORKON_HOME=~/.envs/
 #. /usr/local/bin/virtualenvwrapper.sh
 
-if [[ -e /Users/jderr/.iterm2_shell_integration.zsh ]]; then
-    source /Users/jderr/.iterm2_shell_integration.zsh
+if [[ -e /Users/${USER}/.iterm2_shell_integration.zsh ]]; then
+    source /Users/${USER}/.iterm2_shell_integration.zsh
 fi
 
 for FILENAME in ${HOME}/.dotfiles/aliases ${HOME}/.dotfiles/func; do
