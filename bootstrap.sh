@@ -16,19 +16,17 @@ if [ -x /usr/bin/apt-get ]; then
         nano zsh 
 fi
 
-sudo pip install reattach-to-user-namespace
-
-# Backup existing .vim stuff
-echo "backing up current vim config\n"
-for i in ~/.vim ~/.vimrc ~/.gvimrc; do [ -e $i ] && mv $i $i.old; done
-
-
 echo "cloning jcderr/dotfiles\n"
 git clone --recursive https://github.com/jcderr/dotfiles.git ~/.dotfiles
-ln -s ~/.dotfiles/vimrc ~/.vimrc
-ln -s ~/.dotfiles/vim ~/.vim
 ln -s ~/.dotfiles/zshrc ~/.zshrc
 ln -s ~/.dotfiles/oh-my-zsh ~/.oh-my-zsh
-cd ~/.dotfiles/powerline-shell && python ./install.py
+
+if [ -x /usr/local/bin/brew ]; then
+	brew install python3
+	brew install pyenv
+
+	pyenv install 3.9.0
+	pyenv global 3.9.0
+fi
 
 echo "thanks for installing jcderr/dotfiles"
