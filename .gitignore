@@ -8,4 +8,6 @@ vim/bundle/
 vim/bundle/
 vim/bundle/
 !vim/bundle/vundle
+vim/view/
 bin
+*.env

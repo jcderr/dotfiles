@@ -1,0 +1,14 @@
+https://superuser.com/questions/576506/how-to-use-ssh-rsa-public-key-to-encrypt-a-text
+
+old:
+openssl rsautl -encrypt -pubin -inkey id_rsa.pem.pub -ssl -in myMessage.txt -out myEncryptedMessage.txt
+
+openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in myEncryptedMessage.txt -out myDecryptedMessage.txt
+
+
+new:
+openssl pkeyutl -encrypt -pubin -inkey rsapubkey.pem -in data.txt -out encdata.txt
+
+openssl pkeyutl -decrypt -inkey rsakey.pem -in encdata.txt -out decdata.txt
+
+

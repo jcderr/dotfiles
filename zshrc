@@ -1,3 +1,4 @@
+source ~/.zprofile
 [ -z "$PS1" ] && return
 
 export PYTHONDONTWRITEBYTECODE=1
@@ -26,9 +27,26 @@ function install_powerline_precmd() {
   precmd_functions+=(powerline_precmd)
 }
 
-if [ "$TERM" != "linux" ]; then
+if [ "$TERM" != "linux" -a -x "$(command -v powerline-shell)" ]; then
     install_powerline_precmd
 fi
+
+#function powerline_precmd() {
+#    PS1="$(powerline-shell --shell zsh $?)"
+#}
+
+#function install_powerline_precmd() {
+#  for s in "${precmd_functions[@]}"; do
+#    if [ "$s" = "powerline_precmd" ]; then
+#      return
+#    fi
+#  done
+#  precmd_functions+=(powerline_precmd)
+#}
+
+#if [ "$TERM" != "linux" ]; then
+#    install_powerline_precmd
+#fi
 
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
@@ -65,7 +83,7 @@ source $ZSH/oh-my-zsh.sh
 export GOPATH=${HOME}/src/_go
 
 # Customize to your needs...
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:${GOPATH}/bin:${HOME}/.dotfiles/bin
+export PATH="~/.claude/local:/opt/homebrew/opt/python/libexec/bin:${PATH}"
 
 if [[ -e "/usr/local/bin/vim" ]]; then
     export EDITOR=/usr/local/bin/vim
@@ -96,4 +114,7 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
 fi
+
+. "$HOME/.local/bin/env"
