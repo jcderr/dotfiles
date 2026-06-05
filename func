@@ -70,6 +70,48 @@ imagestatus() {
     done
 }
 
+app() {
+  local cmd="${1:-start}"
+
+  if [[ "$cmd" != "start" ]]; then
+    error "Usage: app start"
+    return 1
+  fi
+
+  if [[ ! -d venv ]]; then
+    error "No venv found in $(pwd)"
+    return 1
+  fi
+
+  # priority list first, then scan for if __name__ == '__main__'
+  local entry
+  for candidate in app.py main.py run.py manage.py; do
+    if [[ -f "$candidate" ]]; then
+      entry="$candidate"
+      break
+    fi
+  done
+
+  if [[ -z "$entry" ]]; then
+    local hits=("${(@f)$(grep -rl '__name__.*__main__' *.py 2>/dev/null)}")
+    if [[ ${#hits} -eq 1 ]]; then
+      entry="${hits[1]}"
+    elif [[ ${#hits} -gt 1 ]]; then
+      error "Multiple candidates: ${hits[*]}. Disambiguate by naming one app.py/main.py/run.py."
+      return 1
+    else
+      error "No Python entry point found in $(pwd)"
+      return 1
+    fi
+  fi
+
+  info "Activating venv..."
+  source venv/bin/activate
+
+  info "Running $entry"
+  python "$entry"
+}
+
 # Stop disk-dependent services before unplugging /Volumes/Junk
 undock() {
   local PLIST=~/Library/LaunchAgents/me.derr.adult-encode-watcher.plist
