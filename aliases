@@ -1,3 +1,20 @@
-#alias vim="/usr/local/bin/vim"
-# alias python="/usr/local/bin/python3"
-# alias pip="/usr/local/bin/pip3"
+# ls
+alias ll='ls -lAh'
+alias la='ls -A'
+
+# safer defaults
+alias cp='cp -i'
+alias mv='mv -i'
+
+# grep with color
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# python
+alias python='python3'
+alias pip='pip3'
+
+# dotfiles
+alias dotfiles='cd ~/.dotfiles'
+alias reload='source ~/.zshrc'
