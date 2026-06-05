@@ -46,8 +46,7 @@ Files in this repo are symlinked into `~`:
 ### Medium — stale but not breaking
 - `func`: `kubeexec()`, `scale()`, `kbounce()`, `kpod()`, `klog()` target CoreOS-era Kubernetes (RC objects, `docker exec` via SSH to a `core` user); modernize or delete
 - `gitconfig`: SourceTree mergetool path points to a Homebrew-cask location from ~2015 that no longer exists
-- `vimrc`: Uses Vundle (`Bundle` declarations); Vundle is effectively unmaintained; consider migrating to vim-plug or native vim packages
-- `vimrc`: `WordProcessorMode()` has a hardcoded thesaurus path to `/Users/sbrown/.vim/` — fix or remove
+- `vimrc`: migrated from Vundle to vim-plug; plugins pruned to python-mode, vim-surround, vim-markdown, NERDTree, vim-fugitive
 - `aliases`: Nearly empty (3 commented-out lines); either populate or remove the file
 
 ### Low — cosmetic / organizational
@@ -66,8 +65,7 @@ Each submodule should be removed from `.gitmodules` and the repo once its replac
 | `powerline-fonts` | `brew install --cask font-meslo-lg-nerd-font` (or whichever font is actually in use) |
 | `powerline-shell` | `pip install powerline-shell` |
 | `solarized` | iTerm2/Terminal color presets installed directly; tmux solarized line removed from tmux.conf |
-| `vim/bundle/vundle` | Switch vimrc to vim-plug: `curl -fLo ~/.vim/autoload/plug.vim --create-dirs ...` |
-| `vim/bundle/vim-jekyll` | Add to vim-plug block if still needed |
+| `vim/bundle/vundle` | Migrated to vim-plug. Install: `curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim` |
 | `tmux-scroll-copy-mode` | Built-in tmux mouse/scroll behavior covers this in modern tmux |
 
 ## What NOT to do
