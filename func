@@ -42,46 +42,6 @@ environ() {
     export ENVIRON_NAME=$1
 }
 
-# terminate an EC2 instance
-terminate() {
-    [[ -n "$1" ]] || error "Please provide an instance id"
-    aws ec2 terminate-instances --instance-id $1
-}
-
-# enter a kube pod
-kubeexec(){
-    IP="`kubectl describe pod $1|grep '^Node'|cut -d/ -f2`"
-    ID=$(kubectl describe pod/$1 | egrep '^\s+Container ID'|awk -F'//' '{print $2}')
-    ssh -l core -t "$IP" docker exec -ti "$ID" bash
-}
-
-# scale a kube rc
-scale() {
-    RC=$1
-    QTY=$2
-
-    if [ -n "$RC" ] && [ -n "$QTY" ]; then
-        kubectl scale rc/$RC --replicas=$QTY > /dev/null 2>&1
-    else
-        error "Please specify an RC and a quantity."
-    fi
-
-    info "Scaled $1 to $2"
-}
-
-# bounce a pod by scaling it to 0, then back to 1
-kbounce() {
-    info "Scaling out..."
-    scale $1 0 > /dev/null 2>&1 || error "Failed to scale out!"
-    sleep 5
-    info "Scaling in..."
-    scale $1 1 > /dev/null 2>&1 || error "Failed to scale in!"
-}
-
-# get pods logs
-klog() {
-    kubectl logs $1
-}
 
 s() {
     if [ -n "$1" ]; then
@@ -97,15 +57,6 @@ e() {
     else
         ls ~/src/_env
     fi
-}
-
-kpod() {
-    # kill all pods for rc
-    name="${1}"
-    [[ -n "${name}" ]] || die "You must specify a pod prefix or rc name"
-    for pod in $(kubectl get pods -l name=${name} --no-headers | awk '{ print $1 }'); do
-        kubectl delete pod/${pod}
-    done
 }
 
 imagestatus() {
