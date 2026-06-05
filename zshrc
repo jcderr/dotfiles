@@ -31,23 +31,6 @@ if [ "$TERM" != "linux" -a -x "$(command -v powerline-shell)" ]; then
     install_powerline_precmd
 fi
 
-#function powerline_precmd() {
-#    PS1="$(powerline-shell --shell zsh $?)"
-#}
-
-#function install_powerline_precmd() {
-#  for s in "${precmd_functions[@]}"; do
-#    if [ "$s" = "powerline_precmd" ]; then
-#      return
-#    fi
-#  done
-#  precmd_functions+=(powerline_precmd)
-#}
-
-#if [ "$TERM" != "linux" ]; then
-#    install_powerline_precmd
-#fi
-
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Example aliases
@@ -75,7 +58,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx docker aws fabric ssh-agent sudo)
+plugins=(git macos docker aws fabric ssh-agent sudo)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,15 +66,13 @@ source $ZSH/oh-my-zsh.sh
 export GOPATH=${HOME}/src/_go
 
 # Customize to your needs...
-export PATH="~/.claude/local:/opt/homebrew/opt/python/libexec/bin:${PATH}"
+export PATH="~/.local/bin:/opt/homebrew/opt/python/libexec/bin:${PATH}"
 
 if [[ -e "/usr/local/bin/vim" ]]; then
     export EDITOR=/usr/local/bin/vim
 else
     export EDITOR=$(which vim)
 fi
-
-eval "`pip3 completion --zsh`"
 
 #export WORKON_HOME=~/.envs/
 #. /usr/local/bin/virtualenvwrapper.sh
@@ -110,11 +91,9 @@ if [[ -e ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
 
-export LSCOLORS=GxFxCxDxBxegedabagaced
-
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
   eval "$(pyenv init --path)"
 fi
 
-. "$HOME/.local/bin/env"
+[[ -e "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"

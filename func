@@ -27,7 +27,7 @@ statuscode () {
 
 # flush dns cache
 flush_dns() {
-    sudo discoveryutil mdnsflushcache;sudo discoveryutil udnsflushcaches;info "DNS Flushed"
+    sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder && info "DNS Flushed"
 }
 
 # load an environment file from ~/.zsh.envs
@@ -111,11 +111,49 @@ kpod() {
 imagestatus() {
     image_id=${1}
     info "Checking $image_id"
-    while true; do 
+    while true; do
         RES=$(aws --region us-east-1 ec2 describe-images --image-id ${image_id} --query 'Images[*].State' --output text)
-        if [[ "$RES" -ne "pending" ]]; then 
+        if [[ "$RES" -ne "pending" ]]; then
             break
         fi
     done
+}
+
+# Stop disk-dependent services before unplugging /Volumes/Junk
+undock() {
+  local PLIST=~/Library/LaunchAgents/me.derr.adult-encode-watcher.plist
+  local STATE=/tmp/adult_encode_interrupted.txt
+
+  local partial
+  partial=$(lsof -c ffmpeg 2>/dev/null | awk '$4 ~ /[0-9]+w/ { print $NF }' | grep "^/Volumes/Junk/Adult/Processed/" | head -1)
+  if [[ -n "$partial" ]]; then
+    echo "$partial" > "$STATE"
+    info "saved interrupted encode: $(basename $partial)"
+  fi
+
+  pkill -x ffmpeg 2>/dev/null && info "ffmpeg killed" || info "ffmpeg not running"
+  launchctl unload "$PLIST" 2>/dev/null && info "encode watcher unloaded" || info "encode watcher not loaded"
+  colima stop && info "colima stopped"
+}
+
+# Restart disk-dependent services after plugging /Volumes/Junk back in
+dock() {
+  local PLIST=~/Library/LaunchAgents/me.derr.adult-encode-watcher.plist
+  local STATE=/tmp/adult_encode_interrupted.txt
+
+  colima start
+
+  if [[ -f "$STATE" ]]; then
+    local partial=$(cat "$STATE")
+    if [[ -f "$partial" ]]; then
+      rm "$partial"
+      info "removed partial encode: $(basename $partial)"
+    fi
+    rm "$STATE"
+  fi
+
+  launchctl load "$PLIST" && info "encode watcher loaded"
+  python3 /usr/local/bin/adult_encode_watcher.py &>> /tmp/adult_encode_watcher.log &
+  info "encode scan started (pid $!)"
 }
 
