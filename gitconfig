@@ -3,13 +3,7 @@
 	email = jcderr@djed.com
 [core]
 	excludesfile = /Users/jcderr/.gitignore_global
-	editor = /usr/bin/vim
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/sourcetree/1.8.1/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+	editor = vim
 [alias]
     st = status -sb
     # various logs
@@ -71,7 +65,3 @@
 
 [push]
 	default = current
-
-[filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
